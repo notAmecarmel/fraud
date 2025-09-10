@@ -19,6 +19,17 @@ feature_names = joblib.load(FEATURES_PATH)
 
 app = FastAPI(title="Fraud Detection API (demo)")
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 # Simple API key check (set API_KEY env var)
 API_KEY = os.environ.get("API_KEY", None)
 
